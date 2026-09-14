@@ -82,60 +82,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             builder: (context, child) {
-              return LayoutBuilder(
-                builder: (context, constraints) {
-                  if (constraints.maxWidth > 520) {
-                    return Scaffold(
-                      backgroundColor: const Color(0xff090c15),
-                      body: Stack(
-                        children: [
-                          Positioned.fill(
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                gradient: RadialGradient(
-                                  center: Alignment(0, -0.3),
-                                  radius: 1.2,
-                                  colors: [
-                                    Color(0xff141f3d),
-                                    Color(0xff090c15),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                maxWidth: 460,
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.6),
-                                      blurRadius: 35,
-                                      spreadRadius: 2,
-                                      offset: const Offset(0, 4),
-                                    )
-                                  ],
-                                  border: Border.symmetric(
-                                    vertical: BorderSide(
-                                      color: Colors.white.withOpacity(0.08),
-                                      width: 1,
-                                    ),
-                                  ),
-                                ),
-                                child: ClipRect(child: child ?? const SizedBox()),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                  return child ?? const SizedBox();
-                },
-              );
+              return child ?? const SizedBox();
             },
             home: SplashScreen(),
           );
