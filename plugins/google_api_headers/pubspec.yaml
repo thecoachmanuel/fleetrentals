@@ -22,6 +22,8 @@ dev_dependencies:
 
 flutter:
   plugin:
+    androidPackage: io.github.zeshuaro.google_api_headers
+    pluginClass: GoogleApiHeadersPlugin
     platforms:
       android:
         package: io.github.zeshuaro.google_api_headers

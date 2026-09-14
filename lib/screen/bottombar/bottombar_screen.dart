@@ -20,7 +20,6 @@ import '../../controller/location_controller.dart';
 import '../../model/homeData_modal.dart';
 import '../../utils/App_content.dart';
 import '../login_flow/onbording_screen.dart';
-import '../desktop/desktop_layout.dart';
 import 'explore_screen.dart';
 
 class BottomBarScreen extends StatefulWidget {
@@ -149,71 +148,65 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   @override
   Widget build(BuildContext context) {
     notifire = Provider.of<ColorNotifire>(context, listen: true);
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth >= 900) {
-          return DesktopLayout(banner: banner);
-        }
-        return RefreshIndicator(
-          onRefresh: _refresh,
-          color: onbordingBlue,
-          child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            backgroundColor: notifire.getbgcolor,
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: load ? SizedBox() : banner.showAddCar == "0" ? SizedBox() : FloatingActionButton(
-              heroTag: null,
-              elevation: 0,
-              backgroundColor: onbordingBlue,
-                onPressed: () {
-                  Get.to(CarInfoScreen());
-                },
-              child: Icon(Icons.add,size: 30),
+    return RefreshIndicator(
+      onRefresh: _refresh,
+      color: onbordingBlue,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: notifire.getbgcolor,
+        // extendBody: true,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: load ? SizedBox() : banner.showAddCar == "0" ? SizedBox() : FloatingActionButton(
+          heroTag: null,
+          elevation: 0,
+          backgroundColor: onbordingBlue,
+            onPressed: () {
+              Get.to(CarInfoScreen());
+            },
+          child: Icon(Icons.add,size: 30),
+        ),
+        bottomNavigationBar:  BottomNavigationBar(
+          backgroundColor: notifire.getbgcolor,
+          type: BottomNavigationBarType.fixed,
+          unselectedItemColor: greyScale1,
+          elevation: 0,
+          selectedLabelStyle: const TextStyle(fontFamily: FontFamily.europaBold, fontSize: 12),
+          fixedColor: onbordingBlue,
+          unselectedLabelStyle: const TextStyle(fontFamily: FontFamily.europaWoff),
+          currentIndex: currentIndex,
+          landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          items: [
+            BottomNavigationBarItem(
+              icon: Image.asset("assets/homeBold.png", color: greyScale1, height: MediaQuery.of(context).size.height / 35),
+              activeIcon: Image.asset("assets/homeBold.png", color: onbordingBlue, height: MediaQuery.of(context).size.height / 35),
+              label: 'Home'.tr,
             ),
-            bottomNavigationBar:  BottomNavigationBar(
-              backgroundColor: notifire.getbgcolor,
-              type: BottomNavigationBarType.fixed,
-              unselectedItemColor: greyScale1,
-              elevation: 0,
-              selectedLabelStyle: const TextStyle(fontFamily: FontFamily.europaBold, fontSize: 12),
-              fixedColor: onbordingBlue,
-              unselectedLabelStyle: const TextStyle(fontFamily: FontFamily.europaWoff),
-              currentIndex: currentIndex,
-              landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-              showSelectedLabels: true,
-              showUnselectedLabels: true,
-              items: [
-                BottomNavigationBarItem(
-                  icon: Image.asset("assets/homeBold.png", color: greyScale1, height: MediaQuery.of(context).size.height / 35),
-                  activeIcon: Image.asset("assets/homeBold.png", color: onbordingBlue, height: MediaQuery.of(context).size.height / 35),
-                  label: 'Home'.tr,
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset("assets/location-pin.png", height: MediaQuery.of(context).size.height / 35),
-                  activeIcon: Image.asset("assets/location-pin.png", color: onbordingBlue, height: MediaQuery.of(context).size.height / 35),
-                  label: 'Explore'.tr,
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset("assets/fevoriteBold.png", color: greyScale1, height: MediaQuery.of(context).size.height / 35),
-                  activeIcon: Image.asset("assets/fevoriteBold.png", color: onbordingBlue, height: MediaQuery.of(context).size.height / 35),
-                  label: 'Favorites'.tr,
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset("assets/profileBold.png", color: greyScale1, height: MediaQuery.of(context).size.height / 35),
-                  activeIcon: Image.asset("assets/profileBold.png", color: onbordingBlue, height: MediaQuery.of(context).size.height / 35),
-                  label: 'Profile'.tr,
-                ),
-              ],
-              onTap: (value) {
-                setState(() {
-                  currentIndex = value;
-                });
-              },
+            BottomNavigationBarItem(
+              icon: Image.asset("assets/location-pin.png", height: MediaQuery.of(context).size.height / 35),
+              activeIcon: Image.asset("assets/location-pin.png", color: onbordingBlue, height: MediaQuery.of(context).size.height / 35),
+              label: 'Explore'.tr,
             ),
-            body: myChilders[currentIndex],
-          ),
-        );
-      },
+            BottomNavigationBarItem(
+              icon: Image.asset("assets/fevoriteBold.png", color: greyScale1, height: MediaQuery.of(context).size.height / 35),
+              activeIcon: Image.asset("assets/fevoriteBold.png", color: onbordingBlue, height: MediaQuery.of(context).size.height / 35),
+              label: 'Favorites'.tr,
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset("assets/profileBold.png", color: greyScale1, height: MediaQuery.of(context).size.height / 35),
+              activeIcon: Image.asset("assets/profileBold.png", color: onbordingBlue, height: MediaQuery.of(context).size.height / 35),
+              label: 'Profile'.tr,
+            ),
+          ],
+          onTap: (value) {
+            setState(() {
+              currentIndex = value;
+            });
+          },
+        ),
+        body: myChilders[currentIndex],
+      ),
     );
   }
 
